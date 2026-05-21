@@ -1,0 +1,28 @@
+# About BeanLab Coffee
+
+BeanLab Coffee is a specialty coffee shop founded in 2021 in downtown Portland, Oregon. We focus on single-origin beans, manual brewing methods, and educating customers about coffee origin and flavor profiles.
+
+## Our story
+Founded by Marcus Chen and Sofia Reyes, two former chemical engineers who fell in love with coffee science during a trip to Colombia. BeanLab is named after our obsession with experimenting with brewing variables — temperature, grind size, water composition — to extract the best flavor from every bean.
+
+## What makes us different
+- All beans are single-origin and traceable to the farm of origin.
+- We roast in-house every Monday and Thursday.
+- Our baristas pass a 6-week internal training program before serving customers.
+- We offer free brewing classes every Saturday morning.
+
+## Locations
+- Main shop: 412 NW Glisan Street, Portland, OR 97209
+- Roastery and pickup: 218 SE Stark Street, Portland, OR 97214
+
+## Hours of operation
+- Monday to Friday: 7:00 AM – 7:00 PM
+- Saturday: 8:00 AM – 8:00 PM
+- Sunday: 8:00 AM – 5:00 PM
+- Closed on Thanksgiving, Christmas Day, and New Year's Day.
+
+## Contact
+- Email: hello@beanlabcoffee.com
+- Phone: (503) 555-0142
+- Instagram: @beanlabcoffee
+- Website: www.beanlabcoffee.com

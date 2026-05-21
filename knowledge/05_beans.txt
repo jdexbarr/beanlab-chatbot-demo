@@ -1,0 +1,66 @@
+# BeanLab Coffee – Single-Origin Beans Catalog
+
+## Colombia – Finca La Esperanza (light roast)
+- Origin: Huila region, Colombia.
+- Farm: Finca La Esperanza, run by the Rojas family since 1962.
+- Altitude: 1,750 meters.
+- Process: washed.
+- Varietals: Caturra, Castillo.
+- Flavor notes: orange peel, milk chocolate, honey, soft floral finish.
+- Best brewing method: V60 pour over, AeroPress.
+- Roast level: light.
+- Price: $22 for 12 oz bag.
+
+## Ethiopia – Yirgacheffe Konga (medium roast)
+- Origin: Yirgacheffe, Ethiopia.
+- Cooperative: Konga Coffee Farmers Cooperative.
+- Altitude: 1,900-2,100 meters.
+- Process: natural (dry-processed).
+- Varietals: heirloom Ethiopian varieties.
+- Flavor notes: blueberry, jasmine, dark chocolate, wine-like body.
+- Best brewing method: Chemex, V60, French Press.
+- Roast level: medium.
+- Price: $24 for 12 oz bag.
+
+## Guatemala – Antigua Pastores (dark roast)
+- Origin: Antigua region, Guatemala.
+- Farm: Finca Pastores, run by the Zelaya family.
+- Altitude: 1,500-1,700 meters.
+- Process: washed.
+- Varietals: Bourbon, Catuai.
+- Flavor notes: dark chocolate, toasted almond, caramel, smoky finish.
+- Best brewing method: espresso, French Press, moka pot.
+- Roast level: dark.
+- Price: $22 for 12 oz bag.
+
+## Peru – Cajamarca Decaf (medium roast)
+- Origin: Cajamarca region, Peru.
+- Process: Swiss Water decaf (chemical-free).
+- Altitude: 1,600-1,800 meters.
+- Varietals: Bourbon, Typica.
+- Flavor notes: nougat, brown sugar, soft acidity, clean finish.
+- Best brewing method: any (versatile).
+- Roast level: medium.
+- Price: $20 for 12 oz bag.
+- Caffeine: 99.9% caffeine-free.
+
+## House Blend (medium-dark roast)
+- Origin: blend of Colombia, Guatemala, and Brazil.
+- Flavor notes: balanced, chocolatey, smooth, easy-drinking.
+- Best brewing method: espresso, drip, French Press.
+- Roast level: medium-dark.
+- Price: $18 for 12 oz bag.
+
+## Roasting schedule
+- We roast every Monday and Thursday morning.
+- Beans are sold no later than 2 weeks from roast date.
+- Roast date is printed on every bag.
+- For optimal freshness, we recommend consuming beans within 4 weeks of the roast date.
+
+## Grind options (free at purchase)
+- Whole bean (default)
+- Espresso (fine)
+- Pour over (medium-fine)
+- Drip (medium)
+- French Press (coarse)
+- Cold brew (extra coarse)

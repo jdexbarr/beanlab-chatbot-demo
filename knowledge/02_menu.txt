@@ -1,0 +1,80 @@
+# BeanLab Coffee Menu
+
+## Espresso-based drinks
+- Espresso (single): $3.50
+- Espresso (double): $4.00
+- Macchiato: $4.25
+- Cortado: $4.50
+- Americano: $4.00
+- Cappuccino: $5.00
+- Latte: $5.50
+- Mocha: $6.00
+- Flat White: $5.25
+
+## Manual brewing methods
+- V60 Pour Over: $6.50
+- Chemex (serves 2): $9.00
+- AeroPress: $6.00
+- French Press (serves 2): $8.50
+- Cold Brew (16 oz): $5.75
+- Nitro Cold Brew: $6.50
+
+## Tea selection
+- Matcha Latte: $5.50
+- Chai Latte (house-made syrup): $5.50
+- Hot tea (loose-leaf, single serving): $4.00
+  - Available: English Breakfast, Earl Grey, Sencha, Jasmine, Chamomile, Peppermint
+
+## Milk options
+- Whole milk: included
+- 2% milk: included
+- Oat milk: +$0.75
+- Almond milk: +$0.75
+- Soy milk: +$0.75
+- Coconut milk: +$0.75
+- Lactose-free milk: +$0.75
+
+## Flavor syrups (in-house, no high-fructose corn syrup)
+- Vanilla: +$0.75
+- Caramel: +$0.75
+- Hazelnut: +$0.75
+- Lavender: +$0.75
+- Brown sugar cinnamon: +$0.75
+- Sugar-free vanilla: +$0.75
+
+## Food menu
+
+### Pastries (from local bakery, daily delivery)
+- Butter croissant: $4.50
+- Almond croissant: $5.50
+- Chocolate croissant: $5.00
+- Cinnamon roll: $5.50
+- Blueberry scone: $4.75
+- Vegan banana bread (slice): $4.50
+- Gluten-free brownie: $5.00
+
+### Sandwiches and breakfast
+- Avocado toast (sourdough): $9.50
+- Egg and cheese sandwich: $8.50
+- Smoked salmon bagel: $12.00
+- Turkey club: $11.00
+- Veggie wrap: $10.00
+- Breakfast burrito: $10.50
+
+## Whole bean coffee (12 oz bags)
+- House blend: $18
+- Single-origin Colombia (light roast): $22
+- Single-origin Ethiopia (medium roast): $24
+- Single-origin Guatemala (dark roast): $22
+- Decaf Peru: $20
+
+## Sizes (for hot drinks)
+- Small (8 oz): standard price
+- Medium (12 oz): +$0.50
+- Large (16 oz): +$1.00
+
+## Sizes (for iced drinks)
+- Medium (16 oz): standard price
+- Large (24 oz): +$1.00
+
+All prices include sales tax. Menu items rotate seasonally.

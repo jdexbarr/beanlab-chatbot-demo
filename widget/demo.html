@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeanLab Coffee — Demo</title>
+  <style>
+    /* ============ GLOBAL RESET ============ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #2d1810 0%, #5d3520 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    /* ============ FAKE WEBSITE BACKGROUND ============ */
+    /* This simulates a real coffee shop website so the demo looks legit */
+    .site-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 32px;
+    }
+
+    .site-header {
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .site-hero {
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .site-subtitle {
+      font-size: 20px;
+      opacity: 0.85;
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.5;
+    }
+
+    .site-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .feature-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .feature-text {
+      font-size: 14px;
+      opacity: 0.7;
+      line-height: 1.5;
+    }
+
+    .demo-instructions {
+      margin-top: 64px;
+      padding: 24px;
+      background: rgba(255, 200, 100, 0.1);
+      border: 1px solid rgba(255, 200, 100, 0.3);
+      border-radius: 12px;
+    }
+
+    .demo-instructions h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .demo-instructions p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    /* ============ CHAT BUBBLE (FLOATING BUTTON) ============ */
+    .chat-bubble {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 64px;
+      height: 64px;
+      background: #5d3520;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
+      z-index: 9999;
+      border: 2px solid #c9a275;
+    }
+
+    .chat-bubble:hover {
+      transform: scale(1.05);
+    }
+
+    .chat-bubble svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+
+    .chat-bubble.hidden {
+      display: none;
+    }
+
+    /* ============ CHAT WINDOW ============ */
+    .chat-window {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 380px;
+      max-width: calc(100vw - 32px);
+      height: 600px;
+      max-height: calc(100vh - 48px);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 9999;
+      transform: scale(0.95) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .chat-window.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ============ CHAT HEADER ============ */
+    .chat-header {
+      background: linear-gradient(135deg, #5d3520 0%, #3d2510 100%);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-header-avatar {
+      width: 40px;
+      height: 40px;
+      background: #c9a275;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .chat-header-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .chat-header-status {
+      font-size: 12px;
+      opacity: 0.8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+    }
+
+    .chat-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0.7;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: opacity 0.2s, background 0.2s;
+    }
+
+    .chat-close:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ============ MESSAGES AREA ============ */
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: #d4d4d4;
+      border-radius: 3px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message.user {
+      background: #5d3520;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.assistant {
+      background: #fff;
+      color: #2a2a2a;
+      align-self: flex-start;
+      border: 1px solid #eaeaea;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.error {
+      background: #fee2e2;
+      color: #991b1b;
+      align-self: flex-start;
+      border: 1px solid #fca5a5;
+    }
+
+    /* ============ TYPING INDICATOR ============ */
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 12px 16px;
+      background: #fff;
+      border: 1px solid #eaeaea;
+      border-radius: 16px;
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+      width: fit-content;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #c9a275;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+      }
+      30% {
+        transform: translateY(-6px);
+        opacity: 1;
+      }
+    }
+
+    /* ============ INPUT AREA ============ */
+    .chat-input-area {
+      padding: 16px;
+      background: #fff;
+      border-top: 1px solid #eaeaea;
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1px solid #d4d4d4;
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-family: inherit;
+      resize: none;
+      max-height: 100px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input:focus {
+      border-color: #5d3520;
+    }
+
+    .send-button {
+      background: #5d3520;
+      color: #fff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      flex-shrink: 0;
+    }
+
+    .send-button:hover:not(:disabled) {
+      background: #3d2510;
+    }
+
+    .send-button:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+
+    .send-button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .send-button svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    /* ============ POWERED BY ============ */
+    .powered-by {
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      padding: 6px;
+      background: #fff;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    /* ============ MOBILE ADJUSTMENTS ============ */
+    @media (max-width: 480px) {
+      .chat-window {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        bottom: 0;
+        right: 0;
+        border-radius: 0;
+      }
+
+      .site-hero {
+        font-size: 40px;
+      }
+    }
+
+    /* ============ MARKDOWN STYLES INSIDE MESSAGES ============ */
+.message.assistant strong {
+  font-weight: 600;
+  color: #2a2a2a;
+}
+
+.message.assistant ul,
+.message.assistant ol {
+  padding-left: 20px;
+  margin: 6px 0;
+}
+
+.message.assistant li {
+  margin: 2px 0;
+}
+
+.message.assistant p {
+  margin: 0 0 8px 0;
+}
+
+.message.assistant p:last-child {
+  margin-bottom: 0;
+}
+
+.message.assistant a {
+  color: #5d3520;
+  text-decoration: underline;
+}
+
+.message.assistant code {
+  background: #f4f0e8;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+  <!-- ============ FAKE WEBSITE BACKGROUND ============ -->
+  <div class="site-content">
+    <div class="site-header">BeanLab Coffee</div>
+    <h1 class="site-hero">Single-origin coffee.<br>Brewed by obsessives.</h1>
+    <p class="site-subtitle">
+      We roast small-batch single-origin beans every Monday and Thursday.
+      Visit us in Portland or order online. Ask our AI barista anything.
+    </p>
+
+    <div class="site-features">
+      <div class="feature-card">
+        <div class="feature-title">☕ Specialty drinks</div>
+        <div class="feature-text">From V60 pour overs to in-house Nitro Cold Brew.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">🎓 Brewing classes</div>
+        <div class="feature-text">Every Saturday at 10 AM. Beginners welcome.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">🌍 Traceable beans</div>
+        <div class="feature-text">Every bag traceable to the farm of origin.</div>
+      </div>
+    </div>
+
+    <div class="demo-instructions">
+      <h3>👋 This is a chatbot demo</h3>
+      <p>
+        Click the chat bubble in the bottom-right corner to talk to BeanLab's AI assistant.
+        Try asking about hours, the menu, allergens, brewing classes, or anything else
+        about the coffee shop.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============ CHAT BUBBLE ============ -->
+  <div class="chat-bubble" id="chatBubble" onclick="openChat()">
+    <svg viewBox="0 0 24 24">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+    </svg>
+  </div>
+
+  <!-- ============ CHAT WINDOW ============ -->
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-header-avatar">☕</div>
+        <div>
+          <div class="chat-header-title">BeanLab Assistant</div>
+          <div class="chat-header-status">
+            <div class="status-dot"></div>
+            Online now
+          </div>
+        </div>
+      </div>
+      <button class="chat-close" onclick="closeChat()">×</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <!-- Messages get injected here by JS -->
+    </div>
+
+    <div class="chat-input-area">
+      <textarea
+        class="chat-input"
+        id="chatInput"
+        placeholder="Ask me anything about BeanLab..."
+        rows="1"
+        onkeydown="handleKeyDown(event)"
+        oninput="autoResize(this)"
+      ></textarea>
+      <button class="send-button" id="sendButton" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="powered-by">Powered by AI ✨</div>
+  </div>
+
+  <script>
+    // ============ CONFIG ============
+    const API_URL = "http://localhost:3000/chat";
+    const SESSION_ID = "session-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+
+    // ============ STATE ============
+    let isWaitingForResponse = false;
+
+    // ============ CHAT OPEN/CLOSE ============
+    function openChat() {
+      document.getElementById("chatWindow").classList.add("open");
+      document.getElementById("chatBubble").classList.add("hidden");
+      document.getElementById("chatInput").focus();
+
+      // Show greeting on first open
+      const messages = document.getElementById("chatMessages");
+      if (messages.children.length === 0) {
+        addMessage(
+          "Hey there! ☕ I'm BeanLab's AI assistant. Ask me anything about our menu, hours, classes, or beans. How can I help?",
+          "assistant"
+        );
+      }
+    }
+
+    function closeChat() {
+      document.getElementById("chatWindow").classList.remove("open");
+      document.getElementById("chatBubble").classList.remove("hidden");
+    }
+
+    // ============ MESSAGE HANDLING ============
+    function addMessage(text, role) {
+  const messages = document.getElementById("chatMessages");
+  const msgEl = document.createElement("div");
+  msgEl.className = "message " + role;
+
+  if (role === "assistant") {
+    // Render Markdown for assistant messages
+    msgEl.innerHTML = marked.parse(text);
+  } else {
+    // Plain text for user messages and errors (prevent XSS)
+    msgEl.textContent = text;
+  }
+
+  messages.appendChild(msgEl);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+    function showTypingIndicator() {
+      const messages = document.getElementById("chatMessages");
+      const indicator = document.createElement("div");
+      indicator.className = "typing-indicator";
+      indicator.id = "typingIndicator";
+      indicator.innerHTML =
+        '<div class="typing-dot"></div>' +
+        '<div class="typing-dot"></div>' +
+        '<div class="typing-dot"></div>';
+      messages.appendChild(indicator);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      const indicator = document.getElementById("typingIndicator");
+      if (indicator) indicator.remove();
+    }
+
+    async function sendMessage() {
+      if (isWaitingForResponse) return;
+
+      const input = document.getElementById("chatInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      // Show user message immediately
+      addMessage(text, "user");
+      input.value = "";
+      input.style.height = "auto";
+
+      // Disable input while waiting
+      isWaitingForResponse = true;
+      document.getElementById("sendButton").disabled = true;
+      showTypingIndicator();
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: text,
+            sessionId: SESSION_ID,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Server returned " + response.status);
+        }
+
+        const data = await response.json();
+        hideTypingIndicator();
+        addMessage(data.reply, "assistant");
+      } catch (error) {
+        hideTypingIndicator();
+        addMessage(
+          "Sorry, something went wrong. Please try again or email hello@beanlabcoffee.com.",
+          "error"
+        );
+        console.error("Chat error:", error);
+      } finally {
+        isWaitingForResponse = false;
+        document.getElementById("sendButton").disabled = false;
+        document.getElementById("chatInput").focus();
+      }
+    }
+
+    // ============ INPUT HANDLING ============
+    function handleKeyDown(event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    }
+
+    function autoResize(textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = Math.min(textarea.scrollHeight, 100) + "px";
+    }
+  </script>
+</body>
+</html>
